@@ -1,0 +1,30 @@
+{
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {"impliedStrict": true}
+  },
+  "env": {"es6": true, "node": true},
+  "rules": {
+    "prettier/prettier": 1,
+
+    "max-len": [
+      1,
+      {
+        "tabWidth": 2,
+        "ignoreUrls": true,
+        // Note: exclude all eslint- directives except for max-len itself since
+        //       `// eslint-disable-line max-len` would cause this line to be
+        //       ignored AND this rule to be disabled which would trigger
+        //       --report-unused-disable-directives. By excluding max-len, the
+        //       effect is to consider the line but disable this rule.
+        "ignorePattern": "^/// .+|// (?!eslint-.+max-len)eslint-.+"
+      }
+    ],
+    "no-console": 1,
+    "no-var": 1,
+    "prefer-const": 1
+  }
+}

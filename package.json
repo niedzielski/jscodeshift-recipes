@@ -1,0 +1,29 @@
+{
+  "name": "jscodeshift-recipes",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "GPL-3.0",
+  "author": "Stephen Niedzielski",
+  "scripts": {
+    "lint": "eslint --cache --max-warnings 0 --report-unused-disable-directives .",
+    "style": "prettier './**/*.{md,json}'",
+    "format": "run-p -s 'lint -- --fix' 'style -- --write'",
+    "test": "run-p -s lint 'style -- -l' test:\\*",
+    "test:unit": "jest"
+  },
+  "engines": {
+    "node": "10.0.4"
+  },
+  "devDependencies": {
+    "babel-preset-env": "1.7.0",
+    "eslint": "4.19.1",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-prettier": "2.6.0",
+    "jest": "22.4.4",
+    "jscodeshift": "0.5.0",
+    "npm-run-all": "4.1.3",
+    "pre-commit": "1.2.2",
+    "prettier": "1.12.1"
+  }
+}

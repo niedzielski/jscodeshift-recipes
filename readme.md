@@ -1,13 +1,17 @@
 # jscodeshift-recipes
+
 A collection of [jscodeshift](https://github.com/facebook/jscodeshift) recipes.
 
 ## Execute a recipe
+
 A recipe can be applied by executing jscodeshift:
+
 ```
 jscodeshift -t RECIPE.js TARGET_DIR/
 ```
 
 E.g.:
+
 ```
 jscodeshift -t src/qunit-assert-equal-to-strictEqual foo/src
 ```
