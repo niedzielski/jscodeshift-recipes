@@ -1,7 +1,7 @@
 {
   "name": "jscodeshift-recipes",
   "version": "0.0.0",
-  "description": "",
+  "description": "A collection of jscodeshift recipes.",
   "keywords": [],
   "license": "GPL-3.0",
   "author": "Stephen Niedzielski",
