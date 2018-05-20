@@ -13,7 +13,7 @@ jscodeshift -t RECIPE.js TARGET_DIR/
 E.g.:
 
 ```
-jscodeshift -t src/qunit-assert-equal-to-strictEqual foo/src
+jscodeshift -t src/qunit-assert-equal-to-strictEqual.js foo/src
 ```
 
 ## License (GPLv3)
