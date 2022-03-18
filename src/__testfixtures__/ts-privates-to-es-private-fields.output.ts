@@ -8,6 +8,7 @@ export class Fruit {
   set banana(banana: string) {
     this.#banana = banana;
   }
+  #pickBanana(): void {this.#pickBanana()}
 
   get apple(): string {
     return this._apple;
@@ -15,4 +16,5 @@ export class Fruit {
   set apple(apple: string) {
     this._apple = apple;
   }
+  _pickApple(): void {this._pickApple()}
 }

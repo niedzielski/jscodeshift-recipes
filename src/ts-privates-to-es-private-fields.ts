@@ -64,7 +64,7 @@ const transform: Transform = (fileInfo, api) => {
   const js = api.jscodeshift
 
   const renamedPrivates = new Set()
-  const renamedSource = js(fileInfo.source)
+  const renamedClassPropertySource = js(fileInfo.source)
     .find(js.ClassProperty, {
       type: 'ClassProperty',
       key: {type: 'Identifier'},
@@ -73,19 +73,31 @@ const transform: Transform = (fileInfo, api) => {
     .forEach((expr) => {
       const {
         value,
-      }: {value: ClassProperty & Partial<Record<'accessibility', string>>} =
-        expr
-      if (!('accessibility' in value) || value.accessibility != 'private')
-        return
+      }: {
+        value: ClassProperty & Partial<Record<'accessibility', string | null>>
+      } = expr
       if (value.key.type != 'Identifier') return
 
       renamedPrivates.add(value.key.name)
-      value.accessibility = ''
+      value.accessibility = null
       value.key.name = renameField(value.key.name)
     })
-    .toSource({parser: 'ts'})
+    .toSource()
 
-  return js(renamedSource)
+  const renamedClassMethodSource = js(renamedClassPropertySource)
+    .find(js.ClassMethod, {
+      accessibility: 'private',
+      type: 'ClassMethod',
+    })
+    .forEach(({value}) => {
+      if (value.key.type != 'Identifier') return
+      renamedPrivates.add(value.key.name)
+      value.accessibility = null
+      value.key.name = renameField(value.key.name)
+    })
+    .toSource()
+
+  return js(renamedClassMethodSource)
     .find(js.MemberExpression, {
       type: 'MemberExpression',
       object: {type: 'ThisExpression'},
@@ -96,7 +108,7 @@ const transform: Transform = (fileInfo, api) => {
       if (!renamedPrivates.has(expr.value.property.name)) return
       expr.value.property.name = renameField(expr.value.property.name)
     })
-    .toSource({parser: 'ts'})
+    .toSource()
 }
 
 function renameField(name: string): string {
