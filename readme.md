@@ -7,13 +7,13 @@ A collection of [jscodeshift](https://github.com/facebook/jscodeshift) recipes.
 A recipe can be applied by executing jscodeshift:
 
 ```
-jscodeshift -t RECIPE.js TARGET_DIR/
+npx jscodeshift -t RECIPE.ts TARGET_DIR/
 ```
 
 E.g.:
 
 ```
-jscodeshift -t src/qunit-assert-equal-to-strictEqual.js foo/src
+npx jscodeshift -t src/qunit-assert-equal-to-strictEqual.ts --parser=ts foo/src
 ```
 
 ## License (GPLv3)
