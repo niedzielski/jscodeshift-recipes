@@ -4,7 +4,7 @@
 // https://api.qunitjs.com/assert/strictEqual
 // https://api.qunitjs.com/assert/equal
 
-export default function(file, api) {
+export default function (file, api) {
   const js = api.jscodeshift
 
   return js(file.source)
@@ -12,10 +12,10 @@ export default function(file, api) {
       callee: {
         type: 'MemberExpression',
         object: {type: 'Identifier', name: 'assert'},
-        property: {type: 'Identifier', name: 'equal'}
-      }
+        property: {type: 'Identifier', name: 'equal'},
+      },
     })
-    .forEach(expr => {
+    .forEach((expr) => {
       expr.value.callee.property.name = 'strictEqual'
     })
     .toSource()
